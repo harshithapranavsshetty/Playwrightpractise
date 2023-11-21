@@ -15,12 +15,8 @@ import com.microsoft.playwright.options.AriaRole;
 public class Dropdown {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-=======
-	
 
-				public static void main(String[] args) {
->>>>>>> branch 'master' of https://github.com/harshithapranavsshetty/Playwrightpractise.git
+
 		// TODO Auto-generated method stub
 		try(Playwright playwrite=Playwright.create()){
 			Browser browser=playwrite.chromium().launch(new BrowserType.LaunchOptions()
