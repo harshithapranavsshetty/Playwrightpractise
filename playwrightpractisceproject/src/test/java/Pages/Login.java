@@ -7,6 +7,7 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.AriaRole;
 
 public class Login {
 	public static void main(String[] args) {
@@ -18,6 +19,10 @@ public class Login {
                     new Browser.NewContextOptions().setViewportSize(null));
             Page page = context.newPage();
             page.navigate(" http://aidas-dashboard.atparui.com:1080");
+            page.getByPlaceholder("Enter email").click();
+//            page.getByPlaceholder("Enter email").fill("Admin");
+  //          page.getByPlaceholder("Password").fill("admin");
+    //        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("LOGIN")).click();
 }
 	}
 }
