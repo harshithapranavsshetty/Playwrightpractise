@@ -14,26 +14,35 @@ public class Dropdown {
 	public static void main(String[] args) {
 	
 
-			
-				// TODO Auto-generated method stub
-				try(Playwright playwrite=Playwright.create()){
-					Browser browser=playwrite.chromium().launch(new BrowserType.LaunchOptions()
-							.setHeadless(false).setArgs(Collections.singletonList("--set-Maximized")));
-					BrowserContext context=browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
-					Page page=context.newPage();
-					page.navigate("https://demo.automationtesting.in/Alerts.html");
-					 page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Alert with Textbox")).click();
-					 page.waitForTimeout(5000);
-					 page.onDialog(dialog -> {
-						 System.out.println(dialog.message());
-			                dialog.accept("Hi");
-					 });
-			                page.waitForTimeout(5000);
-				      page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
-				    		  .setName("click the button to demonstrate the prompt box ")).click();
-				      page.waitForTimeout(5000);
-
+				public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try(Playwright playwrite=Playwright.create()){
+			Browser browser=playwrite.chromium().launch(new BrowserType.LaunchOptions()
+					.setHeadless(false).setArgs(Collections.singletonList("--set-Maximized")));
+			BrowserContext context=browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+			Page page=context.newPage();
+			page.navigate("https://demo.automationtesting.in/Alerts.html");
+page.locator("li").filter(new Locator.FilterOptions().
+				   setHasText("SwitchTo Alerts Windows Frames")).locator("i").click();
+   page.waitForTimeout(5000);
+//			   Locator multi_list_DD = page.locator("#header > nav > div > div.navbar-collapse.collapse.navbar-right > ul > li.dropdown.active > i");
+//	            multi_list_DD.selectOption(new String[] {"Alerts","Windows","Frames"});
+ List<ElementHandle> options = page.locator("#header > nav > div > div.navbar-collapse.collapse.navbar-right > ul > li.dropdown.active > ul")
+		.elementHandles();
+     for (ElementHandle option : options) {
+               String option1 = option.innerText();
+               page.waitForTimeout(5000);
+             System.out.println(option1);
+                if (option1.contains("Alert")) {
+                    option.click();
+                }
+         }
+     
+    page.selectOption("#dropdown-toggle","SwitchTo");
+    /*
+    Selecting dropdown using page.locator().selectOption()
+     */
+    page.locator("dropdown-menu").selectOption("Alert");
+		}
 	}
-	}
-
 }
